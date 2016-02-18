@@ -1,0 +1,10 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Login{%endblock %}
+
+{% block content %}
+<div class="col-md-8 col-md-offset-2" style="margin-top:20px;">  
+
+<div class="well well-lg">{{wtf.quick_form(form)}}</div>
+
+{% endblock %}
