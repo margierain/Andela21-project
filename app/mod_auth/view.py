@@ -9,7 +9,7 @@ mod_auth = Blueprint('auth',__name__, url_prefix='/auth')
 @mod_auth.route('/login/', methods=['GET', 'POST'])
 def login():
     form = LoginForm(request.form) 
-    if  form.validate_on_submit():
+    if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
 
         if user and check_password_hash(user.password, form.password.data):
@@ -18,4 +18,8 @@ def login():
             return redirect(url_for('auth.')) # needs correction.
         flash('Incorrect password or email')    
     return render_template('auth/login.html', form=form)  
+
+# @mod_auth.route('/signup', methods=['POST'])
+# def signup():
+
                 
