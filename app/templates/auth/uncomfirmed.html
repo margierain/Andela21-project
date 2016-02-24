@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %} Jo kenia - Confirm your account {% endblock %}
+{% import "partials/alertMessage.html" as macros %}
+{% block page_content %}
+<h1> Hello, {{ current_user.name }} </h1>
+<h3>Your haven't confirmed your account</h3>
+<div class="row">
+    <div class="col-xs-8 col-sm-6 col-sd-6 pull-left">
+    {{ macros. render_alert("alert-danger", dismissable=False)}}
+        
+    </div>    
+</div>
+<p>
+    You need to confirm your account before accessing this site. 
+    Check your email, we have sent a confirmation link
+</p>
+<p>
+    Need another  confirmation email sent?
+    <a href=" {{ url_for('auth.resetConfirmation') }}">CLICK HERE</a>  
+</p>
+{% endblock %}
+<!-- resetConfirmation needs to be made -->

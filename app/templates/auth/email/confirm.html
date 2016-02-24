@@ -1,0 +1,8 @@
+<p>Dear {{ user.name }},</p>
+<p>To confirm your new email address 
+<a href="{{ 'mod_auth.confirm', token=token, _extends=True }}"></a>Click here. </p>
+<p>Alternatively, you can paste the link below in your browser's address bar:</p><br>
+<p> {{ url_for('mod_auth.confirm', token=token, _external=True) }}</p>
+<p>Sincerely, </p>
+<p>Jo kenia team</p>
+<p><small> Note: Do not reply to this email </small></p>
