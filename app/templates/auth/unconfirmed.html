@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block title %} Jo kenia - Confirm your account {% endblock %}
 {% import "partials/alertMessage.html" as macros %}
-{% block page_content %}
+{% block content %}
 <h1> Hello, {{ current_user.name }} </h1>
 <h3>Your haven't confirmed your account</h3>
 <div class="row">
@@ -16,7 +16,7 @@
 </p>
 <p>
     Need another  confirmation email sent?
-    <a href=" {{ url_for('auth.resetConfirmation') }}">CLICK HERE</a>  
+    <a href=" {{ url_for('auth.resend_confirmation') }}">CLICK HERE</a>  
 </p>
 {% endblock %}
 <!-- resetConfirmation needs to be made -->

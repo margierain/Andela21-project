@@ -1,8 +1,8 @@
-{% extends "layout" %}
+{% extends "layout.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% import "partials/alertMessage.html" as macros %}
 {% block title %} Jo kenia- Email address reset{% endblock %}
-{% block page_content %}
+{% block content %}
 <div class = "row">
     <div class="col-md-6 col-md-offset-3 mod_auth-login-form">
     <div class="row">
@@ -17,4 +17,4 @@
         
     </div>
 </div>
-{% endlock %}
+{% endblock %}

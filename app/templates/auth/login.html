@@ -13,10 +13,10 @@
         <div class="col-md-8 col-md-offset-2" style="margin-top:20px;">  
             {{wtf.quick_form(form)}}<br>
             Be a member?
-            <a href=" {{ url_for('mod_auth.signup') }}"> Sign up here</a>
+            <a href=" {{ url_for('auth.signup') }}"> Sign up here</a>
             <br>
             Forgot your Password!
-            <a href="{{ url_for('mod_auth.password_reset_request') }}">Reset password here</a>
+            <a href="{{ url_for('auth.password_reset_request') }}">Reset password here</a>
             </div>
             </div>
         </div>
