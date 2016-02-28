@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+<form action="/" method="post" enctype="multipart/form-data" >
+{% block title %} Market- Place {% endblock %}
+<div class="col-sm-8 col-sm-offset-2">
+                 {{wtf.quick_form(form)}}
+            </div>
+
+
+    {% if current_user.is_administrator() %}
+        <a class="btn btn-danger"
+            href="{{ url_for('main.edit_product', id=user.id) }}">
+            Edit Product [Admin]
+        </a>
+    {% endif %}        
