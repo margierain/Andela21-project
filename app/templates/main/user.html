@@ -10,7 +10,7 @@
 <h1>{{ user.name }}</h1>
 <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=256) }}">
 
-{% if current_user.is_administrator() %}
+{% if current_user.is_authenticated %}
 <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
 {% endif %}
 <h3>Posts by {{ user.name }}</h3>

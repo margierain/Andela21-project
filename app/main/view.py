@@ -31,31 +31,26 @@ def index():
                                     error_out=False)
     posts = pagination.items
     if form.validate_on_submit():
-        print form
-        post= Post(product=form.product.data, short_description=form.short_description.data,
-                                Long_description=form.Long_description.data,
-                                price=form.price.data)
-
-        db.session.add(post)
-        db.session.commit()
-
-        print "file: ", request.files
+         
         file = request.files['uploadPhotoes']
-        print(file)
-        for attr in dir(file):
-            print attr
+        
+        # for attr in dir(file):
+        #     print attr
+        filename=None
         if file and file.filename.split('.')[-1] in ['jpeg','png','jpg']:
             filename = secure_filename(file.filename)
-            print(filename)
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+
+        post= Post(product=form.product.data, short_description=form.short_description.data,
+                                Long_description=form.Long_description.data,uploadPhotoes=filename,
+                                price=form.price.data)
+        db.session.add(post)
+        db.session.commit()
         flash('Product has been added')
         return redirect(url_for('main.index'))
     else:
-        print form
-        print " in else"
+    
         flash("There are errors in your form")
-        print form.errors
-
     return render_template('main/index.html', form=form, posts=posts,pagination=pagination )
 
 @main.route('/post/<int:id>')

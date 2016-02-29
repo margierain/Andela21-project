@@ -42,7 +42,17 @@
                     {% if post.UploadPhotoes_html %}
                     {{ post.UploadPhotoes_html | safe }}
                     {% else %}
-                    {{ post.UploadPhotoes }}
+                    
+                <div class="col-sm-4">
+                {% if post.uploadPhotoes %}
+                    <img src="{{ url_for('static', filename='images/uploads/'+ post.uploadPhotoes) }}" class="img-rounded" alt="{{post.product}}" width="304" height="236">
+                {% else %}
+                    <p>No photo available.</p>
+                {% endif %}
+                </div>
+  
+
+                    
                     {% endif %}
             </div>
             <div class="post-body">

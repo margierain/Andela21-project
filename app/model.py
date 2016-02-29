@@ -216,15 +216,10 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     product= db.Column(db.String, nullable=False)
-    product_html = db.Column(db.String) 
     short_description = db.Column(db.String(64))
-    short_description_html = db.Column(db.String(64))
-    Long_description = db.Column(db.String(64))
-    Long_description_html = db.Column(db.String(225))
+    Long_description = db.Column(db.String(225))
     uploadPhotoes = db.Column(db.String(255))
-    uploadPhotoes_html = db.Column(db.String(255))
     price = db.Column(db.Integer, nullable=False)
-    price_html = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
