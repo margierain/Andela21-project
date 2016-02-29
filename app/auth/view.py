@@ -66,8 +66,9 @@ def signup():
 def confirm(token):
     if current_user.confirmed:
         return redirect(url_for('main.index'))
-    if current_user.confirmed(token):
+    if current_user.confirm(token):
         flash('Welcome, {}! Thank you for verifying your Account!'.format(current_user.name))
+        return redirect(url_for('main.index'))
     else:
         flash('The confirmation link has expired or is Invalid')
     return redirect(url_for('main.index'))
@@ -91,7 +92,7 @@ def unconfirmed():
 @login_required
 def resend_confirmation():
     token = current_user.generate_confirmation_token()
-    send_email('auth/email/confirm', 'Confirm Your Email','auth/email/confirm',
+    send_email(current_user.email, 'Confirm Your Email','auth/email/confirm',
                 user=current_user, token=token)
     flash('We have sent a new confirmation email')
     return redirect(url_for('main.index'))
