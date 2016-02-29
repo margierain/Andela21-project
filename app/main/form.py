@@ -7,11 +7,11 @@ from werkzeug import secure_filename
 from flask.ext.pagedown.fields import PageDownField
 
 class PostForm(Form):
-    product_html = StringField('Product name:', validators=[Required()]) 
-    short_description_html = StringField('Short description', validators=[Required(), Length(1,64)]) 
-    Long_description_html = StringField('Long description', validators=[Required(), Length(1,225)]) 
-    uploadPhotoes_html = FileField(u'Image File', [regexp(u'^[^/\\\\]\.jpg$')])
-    price_html = StringField('Price', validators= [Required()])
+    product = StringField('Product name:', validators=[Required()]) 
+    short_description = StringField('Short description', validators=[Required(), Length(1,64)]) 
+    Long_description = StringField('Long description', validators=[Required(), Length(1,225)]) 
+    uploadPhotoes = FileField(u'Image File')
+    price = StringField('Price', validators= [Required()])
     submit = SubmitField('Create store')
 
     def upload(request):

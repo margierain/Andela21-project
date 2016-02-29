@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% import "main/macro.html" as macros %}
+
 {% block content %}
 Hello,
 {% if current_user.is_authenticated %}
@@ -9,9 +10,45 @@ Hello,
 Stranger
 {% endif %}!
 
-<div>
-    {% if current_user.can(Permission.WRITE_ARTICLES) %}
-            {{ wtf.quick_form(form) }}
+<div class="row">
+    {% if current_user.is_authenticated %}
+        <div class="col-sm-8 col-sm-offset-2">
+            <form enctype="multipart/form-data" action="{{ url_for('main.index') }}" method="POST">
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    <label for="product">
+                    {{ form.product.label }}
+                    </label>
+                    {{ form.product(size=30, class="form-control", id="product")}}
+                </div>
+                <div>
+                    <label for="short_description">
+                    {{ form.short_description.label }}     
+                    </label>
+                     {{ form.short_description(size=30, class="form-control", id="short_description")}}<br>
+                </div>
+                <div class="form-group">
+                  <label for="Long_description">
+                    {{ form.Long_description.label }}  
+                  </label>  
+                     {{ form.Long_description(size=30, class="form-control", id="short_description")}}<br>
+                </div>
+                <div class="form-group">
+                <label for="uploadPhotoes">
+                    {{ form.uploadPhotoes.label }}
+                </label>
+                     {{ form.uploadPhotoes(size=30, class="form-control",id="uploadPhotoes")}}<br>
+                </div>
+                <div class="form-group">
+                    <label for"price">
+                        {{ form.price.label }}
+                    </label>
+                     {{ form.price(size=30,class="form-control",id="price")}}<br>
+                </div>
+                <button class="btn btn-primary" type="submit">Create store</button>
+                    
+            </form>
+        </div>    
     {% endif %}
 </div>
         {% include 'main/_post.html' %}

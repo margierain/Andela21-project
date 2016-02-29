@@ -1,13 +1,13 @@
 """empty message
 
-Revision ID: ebbc23f945bf
+Revision ID: 55016d701938
 Revises: None
-Create Date: 2016-02-26 20:16:16.587374
+Create Date: 2016-02-29 18:17:58.130838
 
 """
 
 # revision identifiers, used by Alembic.
-revision = 'ebbc23f945bf'
+revision = '55016d701938'
 down_revision = None
 
 from alembic import op
@@ -39,15 +39,15 @@ def upgrade():
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('product', sa.String(), nullable=False),
-    sa.Column('product_html', sa.String(), nullable=False),
-    sa.Column('short_description', sa.String(length=64), nullable=False),
-    sa.Column('short_description_html', sa.String(length=64), nullable=False),
-    sa.Column('Long_description', sa.String(length=64), nullable=False),
-    sa.Column('Long_description_html', sa.String(length=225), nullable=False),
-    sa.Column('uploadPhotoes', sa.String(length=255), nullable=False),
-    sa.Column('uploadPhotoes_html', sa.String(length=255), nullable=False),
+    sa.Column('product_html', sa.String(), nullable=True),
+    sa.Column('short_description', sa.String(length=64), nullable=True),
+    sa.Column('short_description_html', sa.String(length=64), nullable=True),
+    sa.Column('Long_description', sa.String(length=64), nullable=True),
+    sa.Column('Long_description_html', sa.String(length=225), nullable=True),
+    sa.Column('uploadPhotoes', sa.String(length=255), nullable=True),
+    sa.Column('uploadPhotoes_html', sa.String(length=255), nullable=True),
     sa.Column('price', sa.Integer(), nullable=False),
-    sa.Column('price_html', sa.Integer(), nullable=False),
+    sa.Column('price_html', sa.Integer(), nullable=True),
     sa.Column('timestamp', sa.DateTime(), nullable=True),
     sa.Column('author_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['author_id'], ['users.id'], ),

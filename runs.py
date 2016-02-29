@@ -6,6 +6,8 @@ from flask.ext.migrate import Migrate, MigrateCommand
 
 
 app = create_app(os.getenv('JOKEIA_CONFIG') or 'default')
+import pprint
+pprint.pprint(app.config)
 manager =Manager(app)
 migrate = Migrate(app, db)
 

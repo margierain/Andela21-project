@@ -7,10 +7,11 @@
 <div class="page-header">
 <h1>Edit Post</h1>
 </div>
-<div>
-{{ wtf.quick_form(form) }}
+<div class="col-md-6 col-md-offset-3 auth-login-form">
+        <div class="col-sm-8 col-sm-offset-2">
+                 {{wtf.quick_form(form)}}
+        </div>
 </div>
-
 {% endblock %}
 {%block scripts %}
 {{super() }}

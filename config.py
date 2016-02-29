@@ -2,7 +2,6 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 DATABASE_CONNECT_OPTIONS = {}
-SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class Config:
@@ -22,6 +21,7 @@ class Config:
     JOKENIA_POSTS_PER_PAGE = 8
     UPLOAD_FOLDER = os.path.join(BASE_DIR, 'app/static/images/uploads/')
     ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     @staticmethod
     def init_app(app):
