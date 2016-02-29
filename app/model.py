@@ -1,7 +1,7 @@
 # from . import db
 from datetime import datetime
 
-from flask import current_app
+from flask import current_app, request
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -12,6 +12,7 @@ from . import db
 import hashlib
 from markdown import markdown
 import bleach
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # base model is to be inherited
 class Role(db.Model):
     __tablename__='roles'
@@ -25,7 +26,7 @@ class Role(db.Model):
 class Permission:
     FOLLOW = 0x01
     COMMENT = 0x02
-    WRITE_ARTICLES = 0x04
+    WRITE_ARTICLES = 0x80 #0x04
     MODERATE_COMMENTS = 0x08
     ADMINISTER = 0x80    
 
@@ -108,8 +109,10 @@ class User(UserMixin, db.Model):
 
         if data.get('confirm') != self.id:
             return False
+        print("Getting into confirmations...")
         self.confirmed =True
         db.session.add(self)
+        db.session.commit()
         return True
 
     
@@ -213,15 +216,15 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     product= db.Column(db.String, nullable=False)
-    product_html = db.Column(db.String, nullable=False) 
-    short_description = db.Column(db.String(64), nullable=False)
-    short_description_html = db.Column(db.String(64), nullable=False)
-    Long_description = db.Column(db.String(64), nullable=False)
-    Long_description_html = db.Column(db.String(225), nullable=False)
-    uploadPhotoes = db.Column(db.String(255), nullable=False)
-    uploadPhotoes_html = db.Column(db.String(255),nullable=False)
+    product_html = db.Column(db.String) 
+    short_description = db.Column(db.String(64))
+    short_description_html = db.Column(db.String(64))
+    Long_description = db.Column(db.String(64))
+    Long_description_html = db.Column(db.String(225))
+    uploadPhotoes = db.Column(db.String(255))
+    uploadPhotoes_html = db.Column(db.String(255))
     price = db.Column(db.Integer, nullable=False)
-    price_html = db.Column(db.Integer, nullable=False)
+    price_html = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 

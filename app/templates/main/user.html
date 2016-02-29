@@ -5,7 +5,7 @@
 {{super() }}
 {{pagedown.include_pagedown() }}
 {%endblock %}
-{% block page_content %}
+{% block content %}
 <div class="page-header">
 <h1>{{ user.name }}</h1>
 <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=256) }}">
@@ -14,7 +14,7 @@
 <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
 {% endif %}
 <h3>Posts by {{ user.name }}</h3>
-{% include '_post.html' %}
+{% include 'main/_post.html' %}
 </div>
 {% endblock %}
 

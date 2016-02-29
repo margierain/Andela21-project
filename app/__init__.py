@@ -8,8 +8,6 @@ from config import config
 from werkzeug import secure_filename
 from flask.ext.pagedown import PageDown
 
-UPLOAD_FOLDER = 'Upload/'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
 app = Flask(__name__)
@@ -18,8 +16,6 @@ bootstrap = Bootstrap()
 login_manager = LoginManager()
 moment = Moment()
 db = SQLAlchemy()
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 # config
 app.config.from_object('config')

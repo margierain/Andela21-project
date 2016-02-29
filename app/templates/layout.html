@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         {% block navbar %}
-            <nav class="navbar navbar-inverse navbar-fixed-top">
+            <nav class="navbar navbar-inverse navbar-static-top">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -35,7 +35,7 @@
                         </ul>
                         {% if current_user.is_authenticated %}
                         <li>
-                        <a href="{{ url_for('main.user', username=current_user.username) }}">
+                        <a href="{{ url_for('main.user', name=current_user.name) }}">
                         Profile
                         </a>
                         </li>
