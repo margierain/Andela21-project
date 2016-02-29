@@ -10,6 +10,7 @@ from .forms import (LoginForm, Signup, ChangePassword,
                     PasswordResetRequest,PasswordReset, ChangeEmail)
 
 
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     ''' user details are queried if found redirected

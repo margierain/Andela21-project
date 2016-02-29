@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% import "macros.html" as macros %}
+{% import "main/macro.html" as macros %}
+{% block content %}
 Hello,
 {% if current_user.is_authenticated %}
 {{ current_user.name }}
@@ -13,10 +14,10 @@ Stranger
             {{ wtf.quick_form(form) }}
     {% endif %}
 </div>
-        {% include '_post.html' %}
+        {% include 'main/_post.html' %}
 <div class="pagination">
         {{ macros.pagination_widget(pagination, '.index') }}
 </div>
-{% endif %}
 
 
+{% endblock %}

@@ -1,7 +1,7 @@
 # from . import db
 from datetime import datetime
 
-from flask import current_app
+from flask import current_app, request
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -12,6 +12,7 @@ from . import db
 import hashlib
 from markdown import markdown
 import bleach
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # base model is to be inherited
 class Role(db.Model):
     __tablename__='roles'
@@ -108,8 +109,10 @@ class User(UserMixin, db.Model):
 
         if data.get('confirm') != self.id:
             return False
+        print("Getting into confirmations...")
         self.confirmed =True
         db.session.add(self)
+        db.session.commit()
         return True
 
     

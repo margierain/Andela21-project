@@ -2,6 +2,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 <form action="/" method="post" enctype="multipart/form-data" >
 {% block title %} Market- Place {% endblock %}
+{% block content %}
 <div class="col-sm-8 col-sm-offset-2">
                  {{wtf.quick_form(form)}}
             </div>
@@ -13,3 +14,4 @@
             Edit Product [Admin]
         </a>
     {% endif %}        
+    {% endblock %}

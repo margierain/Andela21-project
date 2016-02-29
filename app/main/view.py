@@ -1,21 +1,21 @@
 
 from datetime import datetime
-from flask import render_template, session, redirect, url_for
+from flask import render_template, session, redirect, url_for, request
 from flask.ext.login import login_required, current_user
 from . import main
-from ..model import User, Post, Role  # import classses from model.py
+from ..model import User, Post, Role, Permission # import classses from model.py
 from .form import (PostForm,AdminProfile)# import forms from form,py
 from app.decorators import admin_required, permission_required
-
+from flask import current_app, abort
 
 # this part is good
-@main.route('/user/<username>')
+@main.route('/user/<name>')
 def user(name):
     user = User.query.filter_by(name=name).first()
     if user is None:
         abort(404)
     posts = user.posts.order_by(Post.timestamp.desc()).all()    
-    return render_template('user.html', user=user, post=posts)
+    return render_template('main/user.html', user=user, post=posts)
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -37,12 +37,12 @@ def index():
                                     page, per_page=current_app.config['JOKENIA_POSTS_PER_PAGE'],
                                     error_out=False)
     posts = pagination.items
-    return render_template('index.html', form=form, posts=posts,pagination=pagination )
+    return render_template('main/index.html', form=form, posts=posts,pagination=pagination )
 
 @main.route('/post/<int:id>')
 def post(id):
     post = Post.query.get_or_404(id)
-    return render_template('post.html', posts=[post])
+    return render_template('main/post.html', posts=[post])
 
    
 
