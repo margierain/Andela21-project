@@ -3,11 +3,8 @@
 {% import "main/macro.html" as macros %}
 
 {% block content %}
-Hello,
 {% if current_user.is_authenticated %}
-{{ current_user.name }}
-{% else %}
-Stranger
+<p> Hello,{{ current_user.name }} create your store in minutes!</p> 
 {% endif %}!
 
 <div class="row">

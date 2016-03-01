@@ -244,31 +244,5 @@ class Post(db.Model):
 
 
 
-#     @staticmethod
-#     def on_changed_body(target, value, oldvalue, initiator):
-#         allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
-#                         'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
-#                         'h1', 'h2', 'h3', 'p', 'images']
-#         target.product_html = bleach.linkify(bleach.clean(
-#             markdown(value, output_format='html'),
-#             tags=allowed_tags, strip=True))
-
-#         target.short_description_html = bleach.linkify(bleach.clean(
-#             markdown(value, output_format='html'),
-#             tags=allowed_tags, strip=True))
-        
-#         target.Long_description_html = bleach.linkify(bleach.clean(
-#             markdown(value, output_format='html'),
-#             tags=allowed_tags, strip=True))
-        
-#         target.uploadPhotoes_html = bleach.linkify(bleach.clean(
-#             markdown(value, output_format='html'),
-#             tags=allowed_tags, strip=True))
-
-#         target.price_html = bleach.linkify(bleach.clean(
-#             markdown(value, output_format='html'),
-#             tags=allowed_tags, strip=True))
         
         
-# db.event.listen(Post.product, Post.short_description, Post.Long_description,
-#                 Post.uploadPhotoes,Post.price, 'set', Post.on_changed_body  )        
