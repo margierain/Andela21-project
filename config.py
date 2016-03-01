@@ -18,7 +18,7 @@ class Config:
     JOKENIA_ADMIN = os.environ.get('JOKENIA_ADMIN')
     # the database am working with
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.sqlite')
-    JOKENIA_POSTS_PER_PAGE = 8
+    JOKENIA_POSTS_PER_PAGE = 9
     UPLOAD_FOLDER = os.path.join(BASE_DIR, 'app/static/images/uploads/')
     ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
     SQLALCHEMY_TRACK_MODIFICATIONS = True

@@ -25,7 +25,7 @@ class PostForm(Form):
     
 class AdminProfile(Form):
     email = StringField('Email', validators=[Required(), Length(1, 64), Email()])
-    username = StringField(
+    name = StringField(
         'Username',
         validators=[Required(), Length(1, 64),
                     Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
@@ -45,6 +45,6 @@ class AdminProfile(Form):
         if field.data != self.user.email and User.query.filter_by(email=field.data).first():
             raise ValidationError('Email is already registered.')
 
-    def validate_username(self, field):
-        if field.data != self.user.name and User.query.filter_by(username=field.data).first():
+    def validate_name(self, field):
+        if field.data != self.user.name and User.query.filter_by(name=field.data).first():
             raise ValidationError("Username is taken")

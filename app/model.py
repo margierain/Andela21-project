@@ -216,15 +216,10 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     product= db.Column(db.String, nullable=False)
-    product_html = db.Column(db.String) 
     short_description = db.Column(db.String(64))
-    short_description_html = db.Column(db.String(64))
-    Long_description = db.Column(db.String(64))
-    Long_description_html = db.Column(db.String(225))
+    Long_description = db.Column(db.String(225))
     uploadPhotoes = db.Column(db.String(255))
-    uploadPhotoes_html = db.Column(db.String(255))
     price = db.Column(db.Integer, nullable=False)
-    price_html = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
@@ -249,31 +244,5 @@ class Post(db.Model):
 
 
 
-#     @staticmethod
-#     def on_changed_body(target, value, oldvalue, initiator):
-#         allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
-#                         'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
-#                         'h1', 'h2', 'h3', 'p', 'images']
-#         target.product_html = bleach.linkify(bleach.clean(
-#             markdown(value, output_format='html'),
-#             tags=allowed_tags, strip=True))
-
-#         target.short_description_html = bleach.linkify(bleach.clean(
-#             markdown(value, output_format='html'),
-#             tags=allowed_tags, strip=True))
-        
-#         target.Long_description_html = bleach.linkify(bleach.clean(
-#             markdown(value, output_format='html'),
-#             tags=allowed_tags, strip=True))
-        
-#         target.uploadPhotoes_html = bleach.linkify(bleach.clean(
-#             markdown(value, output_format='html'),
-#             tags=allowed_tags, strip=True))
-
-#         target.price_html = bleach.linkify(bleach.clean(
-#             markdown(value, output_format='html'),
-#             tags=allowed_tags, strip=True))
         
         
-# db.event.listen(Post.product, Post.short_description, Post.Long_description,
-#                 Post.uploadPhotoes,Post.price, 'set', Post.on_changed_body  )        
