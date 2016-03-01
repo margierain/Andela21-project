@@ -12,8 +12,8 @@ from . import db
 import hashlib
 from markdown import markdown
 import bleach
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# base model is to be inherited
+
+
 class Role(db.Model):
     __tablename__='roles'
     
