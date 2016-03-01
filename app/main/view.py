@@ -64,28 +64,39 @@ def post(id):
 
    
 
-@main.route('/edit', methods=['GET', 'POST'])
+@main.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
-def edit():
+def edit(id):
     post = Post.query.get_or_404(id)
-    if current_user != post.author and \
-        not current_user.can(Permission.ADMINISTER):
+    if current_user != post.author: 
         abort(403)
     form = PostForm()
     if form.validate_on_submit():
+        file = request.files['uploadPhotoes']
+        
+        # for attr in dir(file):
+        #     print attr
+        filename=None
+        if file and file.filename.split('.')[-1] in ['jpeg','png','jpg']:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+
         post.product = form.product.data
         post.short_description = form.short_description.data
         post.Long_description = form.Long_description.data
-        post.uploadPhotoes = form.uploadPhotoes.data,
+        post.uploadPhotoes = filename
         post.price = form.price.data
         db.session.add(post)
+        db.session.commit()
         flash('The post has been updated.')
-        return redirect(url_for('edit_post'))
-        return redirect(url_for('post', id=post.id))
+       
+        return redirect(url_for('main.user',name=current_user.name))
+       
+
     form.product.data = post.product
     form.short_description.data = post.short_description
     form.Long_description.data = post.Long_description
-    form.uploadPhotoes.data = post.uploadPhotoes
+    # form.uploadPhotoes.data = frm.uploadPhotoes.data
     form.price.data =  post.price
     return render_template('main/edit_post.html', form=form)
 

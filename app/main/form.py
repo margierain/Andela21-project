@@ -48,3 +48,19 @@ class AdminProfile(Form):
     def validate_name(self, field):
         if field.data != self.user.name and User.query.filter_by(name=field.data).first():
             raise ValidationError("Username is taken")
+
+# class edit_post(Form):
+#     product = StringField('Product name:', validators=[Required()]) 
+#     short_description = StringField('Short description', validators=[Required(), Length(1,64)]) 
+#     Long_description = StringField('Long description', validators=[Required(), Length(1,225)]) 
+#     uploadPhotoes = FileField(u'Image File')
+#     price = StringField('Price', validators= [Required()])
+#     submit = SubmitField('Create store')
+
+#     def upload(request):
+#         form = edit_post(request.POST)
+#         if form.uploadPhotoes.data:
+#             uploadPhotoes_data = request.FILES[form.uploadPhotoes.name].read()
+#             open(os.path.join(BASE_DIR, 'app.sqlite', form.uploadPhotoes.data), 'w').write(uploadPhotoes_data)
+
+
