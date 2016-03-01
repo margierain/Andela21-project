@@ -8,6 +8,7 @@
 {% endif %}!
 
 <div class="row">
+     <div class="col-sm-8 col-sm-offset-2">
     {% if current_user.is_authenticated %}
         <div class="col-sm-8 col-sm-offset-2">
             <form enctype="multipart/form-data" action="{{ url_for('main.index') }}" method="POST">
@@ -47,11 +48,16 @@
             </form>
         </div>    
     {% endif %}
+    </div>
 </div>
+    <div class="well">
         {% include 'main/_post.html' %}
-<div class="pagination">
-        {{ macros.pagination_widget(pagination, '.index') }}
-</div>
-
+        <div class="clearfix"></div>
+    </div>
+    <div class="text-centre">
+        <div class="pagination">
+                {{ macros.pagination_widget(pagination, '.index') }}
+        </div>
+    </div>
 
 {% endblock %}
