@@ -1,12 +1,14 @@
 # Andela21-project an **An online store** *web app*
 This online application enables users sign up in order to create their own onlines stores, edit posts well as share links with potential customers.
+
 Developed using flask *web-framework* in python language
 
- ## Main features
- 1.Create an online store
- 2.Share links to products in ones store
- 3.Edit your store
- 4.Provide user authentication and password recovery options
+## Main features
+
+1.Create an online store
+2.Share links to products in ones store
+3.Edit your store
+4.Provide user authentication and password recovery options
 
 
 NOTE: To gain access a user needs to sign up.
@@ -15,15 +17,15 @@ Alternatively, you can easily get a local copy of this application on your works
 
 ######Clone this repository
 
--$ git clone https://github.com/margierain/Andela21-project.git
+`$ git clone https://github.com/margierain/Andela21-project.git`
 
 ######Install project dependencies via pip. It's recommended that you do this in a virtualenv
 
--$ pip install -r requirements.txt
+`-$ pip install -r requirements.txt`
 
 ######Initialize your development database.
 
--$ python runs.py db init
+`-$ python runs.py db init`
 
 ###### To construct the database and migrate the database models.
 
@@ -36,7 +38,7 @@ Alternatively, you can easily get a local copy of this application on your works
 
 ## Configurations
  
-Incase your deploying this online store application the following environments have to set-up.
+Incase your deploying this online store application the following environment variables have to be set-up.
 
 JOKENIA_ADMIN - 
 JOKENIA_MAIL_SENDER - this is the one how sends users who sign up emails
