@@ -58,9 +58,14 @@
                                 <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
                             {% endif %}
                                 <div class="profile-thumbnail">
+                                            {% if current_user.is_authenticated %}
                                             <a href="{{ url_for('main.user', name=current_user.name) }}">
                                                 <img class="img-rounded profile-thumbnail"
-                                                src="{{ current_user.gravatar(size=30) }}">
+                                                src="{{ current_user.gravatar(size=30)  }}">
+                                                {% else %}
+                                                
+                                                <img class="{{url_for('static', filename='images/uploads/default.jpg') }}"
+                                                {% endif %}
                                             </a>
                                 </div>            
                         </ul>
