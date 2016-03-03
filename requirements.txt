@@ -11,7 +11,6 @@ Flask-Mail==0.9.1
 Flask-Migrate==1.7.0
 Flask-Moment==0.5.1
 Flask-PageDown==0.2.1
-Flask-PyMongo==0.4.0
 Flask-Script==2.0.5
 Flask-SQLAlchemy==2.1
 Flask-SSLify==0.1.5
@@ -32,11 +31,9 @@ path.py==8.1.2
 pexpect==4.0.1
 pickleshare==0.6
 ptyprocess==0.5.1
-pymongo==3.2.1
 python-editor==0.5
 simplegeneric==0.8.1
 six==1.10.0
-SQLAlchemy==1.0.12
 SQLAlchemy-ImageAttach==0.9.0
 sqlalchemy-migrate==0.7.2
 SQLAlchemy-Utils==0.31.6
