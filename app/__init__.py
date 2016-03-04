@@ -7,7 +7,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from config import config
 from werkzeug import secure_filename
 from flask.ext.pagedown import PageDown
-
+from flask_oauthlib.client import OAuth, OAuthException
 
 
 app = Flask(__name__)
@@ -16,9 +16,10 @@ bootstrap = Bootstrap()
 login_manager = LoginManager()
 moment = Moment()
 db = SQLAlchemy()
-
 # config
 app.config.from_object('config')
+# social auth
+oauth = OAuth(app)
 # login manager
 login_manager.init_app(app)
 # show the login manager where the view is locate else the @login_required won't locate it
@@ -26,6 +27,8 @@ login_manager.login_view = 'auth.login'
 # keep track of clients IP address and browser, logout if they change
 login_manager.session_protection ='strong'
 pagedown = PageDown()
+
+
 
 def create_app(config_name):
     app = Flask(__name__)

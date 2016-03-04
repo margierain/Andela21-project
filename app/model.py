@@ -12,6 +12,8 @@ from . import db
 import hashlib
 from markdown import markdown
 import bleach
+from flask.ext.social import Social
+from flask.ext.social.datastore import SQLAlchemyConnectionDatastore
 
 
 class Role(db.Model):
@@ -68,7 +70,7 @@ class User(UserMixin, db.Model):
 
     role_id =db.Column(db.Integer, db.ForeignKey('roles.id'))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
-    comments = db.relationship('Comment', backref='author', lazy='dynamic')
+   
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
         if self.role is None:
@@ -223,7 +225,6 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    comments = db.relationship('Comment', backref='post', lazy='dynamic')
     
     @staticmethod
     def generate_fake(count=100):
@@ -243,23 +244,3 @@ class Post(db.Model):
                                     author=u)
             db.session.add(p)
             db.session.commit()
-
-
-class Comment(db.Model):
-    __tablename__ = 'comments'# this is the product section    
-
-    id = db.Column(db.Integer, primary_key=True)
-    product= db.Column(db.String, nullable=False)
-    short_description = db.Column(db.String(64))
-    Long_description = db.Column(db.String(225))
-    uploadPhotoes = db.Column(db.String(255))
-    price = db.Column(db.Integer, nullable=False)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    disabled = db.Column(db.Boolean)
-    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
-
-
-
-        
-        

@@ -9,6 +9,19 @@ from app.utils import send_email
 from .forms import (LoginForm, Signup, ChangePassword, 
                     PasswordResetRequest,PasswordReset, ChangeEmail)
 
+from flask_oauthlib.client import OAuth, OAuthException
+from .. import oauth
+facebook = oauth.remote_app(
+    'facebook',
+    consumer_key='654521371352208',
+    consumer_secret='0e9043c8140ca7d6e474c8b6f3e55952',
+    request_token_params={'scope': 'email'},
+    base_url='https://graph.facebook.com',
+    request_token_url=None,
+    access_token_url='/oauth/access_token',
+    access_token_method='GET',
+    authorize_url='https://www.facebook.com/dialog/oauth'
+)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -32,11 +45,7 @@ def login():
         flash('Incorrect password or email')    
     return render_template('auth/login.html', form=form)
 
-# # gets the user_id doing a session
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return User.get(user_id)
-# # logout process
+
 @auth.route('/logout')
 @login_required
 def logout():
@@ -134,7 +143,7 @@ def password_reset_request():
             return redirect(url_for('auth.login'))
         else:
             flash('No account found with that email address')
-            return redirect(url_for('auth.resetPassword', form=form)) 
+            return redirect(url_for('auth.change_password', form=form)) 
     return render_template('auth/reset_password.html', form=form)
 
 @auth.route('/reset/<token>', methods=['GET','POST'])
@@ -186,3 +195,35 @@ def change_email(token):
     else:
         flash('Invalid request')
     return redirect(url_for('main.index'))        
+
+# facebook login
+@auth.route('/fb_login')
+def fb_login():
+    callback = url_for(
+        'facebook_authorized',
+        next=request.args.get('next') or request.referrer or None,
+        _external=True
+    )
+    return facebook.authorize(callback=callback)
+
+
+@auth.route('/login/authorized')
+def facebook_authorized():
+    resp = facebook.authorized_response()
+    if resp is None:
+        return 'Access denied: reason=%s error=%s' % (
+            request.args['error_reason'],
+            request.args['error_description']
+        )
+    if isinstance(resp, OAuthException):
+        return 'Access denied: %s' % resp.message
+
+    session['oauth_token'] = (resp['access_token'], '')
+    me = facebook.get('/me')
+    print 'Logged in as id=%s name=%s redirect=%s' % \
+        (me.data['id'], me.data['name'], request.args.get('next'))
+    return redirect(url_for('main.index'))
+
+@facebook.tokengetter
+def get_facebook_oauth_token():
+    return session.get('oauth_token')

@@ -4,8 +4,8 @@ from flask import render_template, session, redirect, url_for, request, flash
 from flask.ext.login import login_required, current_user
 from . import main
 from .. import db
-from ..model import User, Post, Role, Permission, Comment # import classses from model.py
-from .form import (PostForm,AdminProfile,CommentForm)# import forms from form,py
+from ..model import User, Post, Role, Permission # import classses from model.py
+from .form import (PostForm,AdminProfile)# import forms from form,py
 from app.decorators import admin_required, permission_required
 from flask import current_app, abort
 from werkzeug import secure_filename
@@ -65,30 +65,32 @@ def create_store():
 
 @main.route('/post/<int:id>',methods=['GET', 'POST'])
 def post(id):
-
     post = Post.query.get_or_404(id)
-    form = CommentForm()
-    if form.validate_on_submit():
-        comment = Comment(body=form.body.data,
-                          post=post,
-                          author=current_user._get_current_object())
-        db.session.add(comment)
-        flash('Your comment has been published.')
-        return redirect(url_for('.post', id=post.id, page=-1))
-    page = request.args.get('page', 1, type=int)
-    if page == -1:
-        page = (post.comments.count() - 1) // \
-            current_app.config['JOKENIA_COMMENTS_PER_PAGE'] + 1
-    pagination = post.comments.order_by(Comment.timestamp.asc()).paginate(
-        page, per_page=current_app.config['JOKENIA_COMMENTS_PER_PAGE'],
-        error_out=False)
-    comments = pagination.items
-    return render_template('main/post.html', posts=[post], form=form,
-                           comments=comments, pagination=pagination)
+    return render_template('main/post.html', posts=[post])
 
-    
+# @main.route('/post/<int:id>',methods=['GET', 'POST'])
+# def post(id):
 
-   
+#     post = Post.query.get_or_404(id)
+#     form = CommentForm()
+#     if form.validate_on_submit():
+#         comment = Comment(body=form.body.data,
+#                           post=post,
+#                           author=current_user._get_current_object())
+#         db.session.add(comment)
+#         flash('Your comment has been published.')
+#         return redirect(url_for('.post', id=post.id, page=-1))
+#     page = request.args.get('page', 1, type=int)
+#     if page == -1:
+#         page = (post.comments.count() - 1) // \
+#             current_app.config['JOKENIA_COMMENTS_PER_PAGE'] + 1
+#     pagination = post.comments.order_by(Comment.timestamp.asc()).paginate(
+#         page, per_page=current_app.config['JOKENIA_COMMENTS_PER_PAGE'],
+#         error_out=False)
+#     comments = pagination.items
+#     return render_template('main/post.html', posts=[post], form=form,
+#                            comments=comments, pagination=pagination)
+
 
 @main.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
