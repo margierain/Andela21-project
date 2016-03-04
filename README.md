@@ -1,7 +1,7 @@
-# Andela21-project an **An online store** *web app*
+# Andela21-project an **An online store** \*web app\*
 This online application enables users sign up in order to create their own onlines stores, edit posts well as share links with potential customers.
 
-Developed using flask *web-framework* in python language
+Developed using flask \*web-framework\* in python language
 
 ## Main features
 

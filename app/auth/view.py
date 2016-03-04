@@ -128,7 +128,7 @@ def password_reset_request():
         if user:
             token = user.generate_confirmation_token()
             send_email(
-                        user.email, 'Reset your password', 'auth/email/resetPassword',
+                        user.email, 'Reset your password', 'auth/email/reset_password',
                         user=user, token=token, next=request.args.get('next'))
             flash('we have send an email with instruction how to reset your password')
             return redirect(url_for('auth.login'))
