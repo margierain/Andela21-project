@@ -51,3 +51,6 @@ class AdminProfile(Form):
 
 
 
+class CommentForm(Form):
+    body = StringField('', validators=[Required()])
+    submit = SubmitField('Submit')

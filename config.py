@@ -1,12 +1,11 @@
 import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-DATABASE_CONNECT_OPTIONS = {}
-
 
 class Config:
     DEBUG = True
     CSRF_ENABLED =True
+    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SECRET_KEY = os.environ.get('SECRET_KEY')
     MAIL_SERVER ='smtp.gmail.com'
     MAIL_PORT = 587
@@ -19,6 +18,7 @@ class Config:
     # the database am working with
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.sqlite')
     JOKENIA_POSTS_PER_PAGE = 9
+    JOKENIA_COMMENTS_PER_PAGE = 15
     UPLOAD_FOLDER = os.path.join(BASE_DIR, 'app/static/images/uploads/')
     ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
     SQLALCHEMY_TRACK_MODIFICATIONS = True

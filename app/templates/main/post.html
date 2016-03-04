@@ -1,5 +1,14 @@
 {% extends "layout.html" %}
 {% block title %}Market place{% endblock %}
+{% import "main/macro.html" as macros %}
 {% block content %}
 {% include 'main/_post.html' %}
+
+{% if current_user.is_athenticated %}
+<div class="comment-form">
+    {{ wtf.quick_form(form) }}
+</div>
+{% endif %}
+{% include 'main/_comment.html' %}
+
 {% endblock %}
