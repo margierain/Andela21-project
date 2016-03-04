@@ -1,2 +1,5 @@
 venv/
-*.pyc.heroku-config.sh
+*.pyc
+.heroku-config.sh
+dev-data.db
+test-data.db

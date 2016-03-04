@@ -1,7 +1,7 @@
-# Andela21-project an **An online store** \*web app\*
+# Andela21-project an **An online store** *web app*
 This online application enables users sign up in order to create their own onlines stores, edit posts well as share links with potential customers.
 
-Developed using flask \*web-framework\* in python language
+Developed using flask *web-framework* in python language
 
 ## Main features
 
@@ -21,32 +21,33 @@ Alternatively, you can easily get a local copy of this application on your works
 
 ###### Install project dependencies via pip. It's recommended that you do this in a virtualenv
 
-`-$ pip install -r requirements.txt`
+`$ pip install -r requirements.txt`
 
 ###### Initialize your development database.
 
-`-$ python runs.py db init`
+`$ python runs.py db init`
 
 ###### To construct the database and migrate the database models.
 
--$python runs.py db migrate
--$ python runs.py db upgrade
+`$python runs.py db migrate`
+
+`$ python runs.py db upgrade`
 
 ###### Run the server.
 
--$ python runs.py runserver  
+`$ python runs.py runserver`  
 
 ## Configurations
  
 Incase your deploying this online store application the following environment variables have to be set-up.
 
-1. JOKENIA_ADMIN - The email address of this is system administrator. When the administrator (user with this email) signs up in the registration page, the system will automatically assign them the admin role.
+1. `JOKENIA_ADMIN` - The email address of this is system administrator. When the administrator (user with this email) signs up in the registration page, the system will automatically assign them the admin role.
 
-2. JOKENIA_MAIL_SENDER - this is the one how sends users who sign up emails
+2. `JOKENIA_MAIL_SENDER` - this is the one how sends users who sign up emails
 
-3. SECRET_KEY -  this key generates the tokens generate by the CSRF as well as the authentication send to users who sign up 
+3. `SECRET_KEY` -  this key generates the tokens generate by the CSRF as well as the authentication send to users who sign up 
 
-4. JOKENIA_PASSWORD- this is the password for the Admin
+4. `JOKENIA_PASSWORD`- this is the password for the Admin
 
 ## How the app works
 As a new user your required to sign up then check your email for an access token sent by our team to give you access to use the application.Just incase the token  expires, you have an option to resend yourself another  token.   
