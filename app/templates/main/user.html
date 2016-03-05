@@ -6,30 +6,37 @@
 {{pagedown.include_pagedown() }}
 {%endblock %}
 {% block content %}
-<div class="page-header"> 
-    <h3>{{ user.name }}'s, store</h3>
-    {% if user.posts %}
-    {% include 'main/_post.html' %}
-    {% endif %}
-</div>
-<div class="col-sm-4">
-    <div class="pull-right">
-        
-        <h1>{{ user.name }}</h1>
-        <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=150) }}">
-
-        {% if current_user.is_authenticated %}
-        <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+<div class="col-sm-9 pull-left">
+    <div class="page-header"> 
+        <h3>{{ user.name }}'s, store</h3>
+        {% if user.posts %}
+        {% include 'main/_post.html' %}
         {% endif %}
+    </div>
+</div>
+<div class="col-sm-1 aside pull-right">
+    <div class="col-sm-4">
+        <div class="pull-right">
+            
+            <h1>{{ user.name }}</h1>
+            <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=150) }}">
 
-        <p>Member since {{ moment(user.member_since).format('L') }}. Last seen {{ moment(user.last_seen).fromNow() }}.</p>
-            <p>{{ user.posts.count() }} products posted. </p>
-    </div>    
+            {% if current_user.is_authenticated %}
+            <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+            {% endif %}
+
+            <p>Member since {{ moment(user.member_since).format('L') }}. Last seen {{ moment(user.last_seen).fromNow() }}.</p>
+                <p>{{ user.posts.count() }} products posted. </p>
+        </div>    
+    </div>
 </div>
 {% if user.posts.count() == 0 %}
-    <div class="col-sm-8 col-sm-offset-2 text-center">
-        <h2 class="page-header"> Make your first post, and see it appear here  </h2>
+<div class="row">
+    <div class="col-sm-9 col-sm-offset-3">
+        <h2> Make your first post, and see it appear here  </h2><hr>
     </div>
+    
+</div>
 {% endif %}        
 {% endblock %}
 
